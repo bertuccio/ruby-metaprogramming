@@ -6,6 +6,7 @@ class Asignatura
   include FechasInterfaz
 
   attr :fechaComienzo
+  attr :elementos
   
   def <=>(other)
     @fechaComienzo <=> other.fechaComienzo
@@ -30,8 +31,12 @@ class Asignatura
             return false
       else
         logic = false
-        @elementos.each{|x| logic = (logic or x.contains(elemento))}
-        return logic   
+        @elementos.each{|x| 
+          if x.contains(elemento)
+            return true
+          end
+          }
+        return false
       end
     end
     return self == elemento
@@ -44,7 +49,18 @@ class Asignatura
     else
       if contains(elemento)
         puts "Elemento duplicado: " + elemento.to_s
+        return
       else
+        if elemento.is_a? Tema
+          unless elemento.elementos.nil?
+            elemento.elementos.each{|x|
+              if self.contains(x)
+                puts "Elemento duplicado: " + x.to_s
+                return
+              end
+            }
+          end
+        end
         @elementos.push(elemento)
       end
     end
@@ -65,25 +81,28 @@ class Asignatura
     return @fechaComienzo
   end
   
-  def tos(s, indent)
+  def print(indent)
+    printf "\n"
     unless @elementos.nil?
-      i = 0
-      while i < indent
-        s += "\n\t"
-      end
-      indent++
-      s += @elementos.sort.tos(s,indent)
+      localindent = indent
+      indent +=1
+      #ojete = @elementos.sort
+      @elementos.sort.each{|x| 
+        i = 0
+        while i < localindent
+          printf "\t"
+          i +=1
+        end
+        x.print(indent)}
     end
   end
   
   def to_s
-    indent = 0
-    s = '+Asignatura: ' + @nombre.to_s + ', ' + @nif.to_s + 
+    printf '+Asignatura: ' + @nombre.to_s + ', ' + @nif.to_s + 
       ', ' + @email.to_s + ', ' + @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
     
-    self.tos(s,indent)
-    
-    return s
+    self.print(1)
+    return ""
   end
   
   def == (other)

@@ -8,13 +8,20 @@ asignatura = Asignatura.new('asignatura',123,'hola@hola.com')
 tema = Tema.new('tema1')
 asignatura.addElemento(tema)
 tema2 = Tema.new('tema2')
-apuntes3 = Apuntes.new('apunt3','texto',Date.new(2012,1,5),10)
-apuntes1 = Apuntes.new('apunt1','texto',Date.new(2015,7,5),3)
-apuntes2 = Apuntes.new('apunt2','texto',Date.new(2016,3,5),1)
+apuntes3 = Apuntes.new('apunt1','texto',Date.new(2009,1,5),10)
+apuntes1 = Apuntes.new('apunt3','texto',Date.new(2011,7,5),3)
+apuntes2 = Apuntes.new('apunt2','texto',Date.new(2008,3,5),1)
 tema.addElemento(apuntes2)
 tema.addElemento(apuntes1)
 tema2.addElemento(apuntes3)
+tema.addElemento(tema2)
+tema3 = Tema.new('tema3')
+tema3.addElemento(Apuntes.new('apunt4','texto',Date.new(2008,3,5),6))
+asignatura.addElemento(tema3)
 asignatura.addElemento(tema2)
+
+apuntes4 = Apuntes.new('apunt5','texto',Date.new(2004,1,5),2)
+asignatura.addElemento(apuntes4)
 puts asignatura.fechaComienzo.to_s
 puts asignatura.numHorasDedicacion.to_s
 puts asignatura

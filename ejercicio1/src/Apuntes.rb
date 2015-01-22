@@ -40,6 +40,11 @@ class Apuntes
 #  end
 
   
+  def print(indent)
+    printf self.to_s
+    printf("\n")
+  end
+  
   def to_s
     s = '+Apuntes: ' + @descripcion.to_s + ' comienzo: ' +
       @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s

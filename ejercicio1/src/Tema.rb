@@ -5,7 +5,8 @@ class Tema
   include FechasInterfaz
 
   attr :fechaComienzo
-  
+  attr :elementos
+ 
   def <=>(other)
     @fechaComienzo <=> other.fechaComienzo
   end
@@ -40,24 +41,15 @@ class Tema
             return false
       else
         logic = false
-        @elementos.each{|x| logic = (logic or x.contains(elemento))}
-        return logic   
+        @elementos.each{|x| 
+          if x.contains(elemento)
+            return true
+          end
+          }
+        return false
       end
     end
     return self == elemento
-  end
-  
-  def tos(s, indent)
-    
-    s += '+Tema: ' + @descripcion.to_s + ', ' + @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
-    unless @elementos.nil?
-      i = 0
-      while i < indent
-        s += "\n\t"
-      end
-      indent++
-      s += @elementos.sort.tos(s,indent)
-    end
   end
   
   def addElemento(elemento)
@@ -67,19 +59,45 @@ class Tema
     else
       if contains(elemento)
         puts "Elemento duplicado: " + elemento.to_s
+        return
       else
+        if elemento.is_a? Tema
+          unless elemento.elementos.nil?
+            elemento.elementos.each{|x|
+              if self.contains(x)
+                puts "Elemento duplicado: " + x.to_s
+                return
+              end
+            }
+          end
+        end
         @elementos.push(elemento)
       end
     end
   end
   
-
+  def print(indent)
+    printf self.to_s
+    printf "\n"
+    unless @elementos.nil?
+    
+      localindent = indent
+      indent +=1
+      @elementos.sort.each{|x|  
+        i = 0
+        while i < localindent
+          printf "\t"
+          i +=1
+        end
+        x.print(indent)}
+    end
+  end
   
   def to_s
     s = '+Tema: ' + @descripcion.to_s + ', ' + @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
-    unless @elementos.nil?
-      s += "\n\t-" + @elementos.sort.to_s
-    end
+#    unless @elementos.nil?
+#      s += "\n\t-" + @elementos.sort.to_s
+#    end
     return s
   end
   
