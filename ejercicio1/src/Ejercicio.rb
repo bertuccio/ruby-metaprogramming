@@ -5,12 +5,14 @@ class Ejercicio
     @fechaComienzo = nil
     @numHoras = nil
   end
-  
+  include Descripcion
   def fechaComienzo=(fecha)
     @fechaComienzo = fecha
   end
   
-  def getDescripcion()
-    put @descripcion
+  def == (other)
+
+      @descripcion == other.descripcion 
+
   end
 end

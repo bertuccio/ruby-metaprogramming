@@ -10,7 +10,11 @@ class Apunte
     @fechaComienzo = fecha
   end
   
-  def getDescripcion()
-    put @descripcion
+  include Descripcion
+  
+  def == (other)
+
+      @descripcion == other.descripcion 
+ 
   end
 end
