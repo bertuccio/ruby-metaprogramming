@@ -1,24 +1,22 @@
 class Tema
   
-
+  include Comparable
+  
+  attr :fechaComienzo
+  
+  def <=>(other)
+    @fechaComienzo <=> other.fechaComienzo
+  end
+  
   def initialize(descripcion)
     @descripcion = descripcion
     @elementos = nil
     @fechaComienzo = nil
   end
+  
+  attr_reader :descripcion
 
-  def to_s
-    s = '+Tema: ' + @descripcion.to_s + ', ' + @fechaComienzo.to_s
-    unless @elementos.nil?
-      s += "\n\t-" + @elementos.to_s
-    end
-    return s
-  end
-  
-  def == (other)
-      @descripcion == other.descripcion 
-  end
-  
+
   def contains(elemento)
     unless @elementos.nil?
       if @elementos.empty? 
@@ -32,8 +30,7 @@ class Tema
     return self == elemento
   end
   
-  def fechaComienzo()
-    
+  def fechaComienzo
     unless @elementos.nil?
       fechas = Array.new
       @elementos.each{|elemento| fechas.push(elemento.fechaComienzo())} 
@@ -41,7 +38,8 @@ class Tema
       @fechaComienzo = fechas.first
       return fechas.first
     end
-    return nil
+    @fechaComienzo = Time.now.to_date
+    return Time.now.to_date
   end
   
   def addElemento(elemento)
@@ -55,5 +53,26 @@ class Tema
         @elementos.push(elemento)
       end
     end
+  end
+  
+  def numHorasDedicacion
+    numHoras = 0
+    unless @elementos.nil?
+      @elementos.each{|elemento| 
+        (numHoras += elemento.numHorasDedicacion)} 
+    end
+    return numHoras
+  end
+  
+  def to_s
+    s = '+Tema: ' + @descripcion.to_s + ', ' + @fechaComienzo.to_s
+    unless @elementos.nil?
+      s += "\n\t-" + @elementos.sort.to_s
+    end
+    return s
+  end
+  
+  def == (other)
+      @descripcion == other.descripcion 
   end
 end
