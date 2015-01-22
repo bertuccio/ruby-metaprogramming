@@ -12,11 +12,13 @@ class Asignatura
     @fechaComienzo <=> other.fechaComienzo
   end
   
-  def initialize(nombre,nif,email)
+  def initialize(codigo, nombre)
     # Instance variables
+#    @nombre = nombre
+#    @nif = nif
+#    @email = email 
+    @codigo = codigo
     @nombre = nombre
-    @nif = nif
-    @email = email 
     @elementos = nil
     @fechaComienzo = nil
     @numHorasDedicacion = nil
@@ -98,8 +100,8 @@ class Asignatura
   end
   
   def to_s
-    printf '+Asignatura: ' + @nombre.to_s + ', ' + @nif.to_s + 
-      ', ' + @email.to_s + ', ' + @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
+    printf '+Asignatura: ' + @codigo.to_s + ', ' + @nombre.to_s + ', ' +
+      @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
     
     self.print(1)
     return ""

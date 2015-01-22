@@ -74,6 +74,11 @@ class Ejercicio
       @descripcion == other.descripcion 
   end
   
+  def print(indent)
+    printf self.to_s
+    printf("\n")
+  end
+  
   def to_s
     s = '+Ejercicio: ' + @descripcion.to_s + ' comienzo: ' +
       @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
@@ -84,26 +89,26 @@ end
 
 #Test 
 
-require 'Apartado'
-require 'date'
-
-a = Apartado.new('enunciado1',1)
-begin
-  #Añade una fecha incorrecta
-  e = Ejercicio.new('ejercicio1',Date.new(2015,2,13),Date.new(2015,1,15),a,5)
-  rescue ArgumentError
-    puts $!
-  ensure
-end
-
-begin
-  e = Ejercicio.new('ejercicio1',Date.new(2015,1,13),Date.new(2015,1,15),a,5)
-  puts e
-  #Añade un ejercicio como apartado (error)
-  e1 = Ejercicio.new('ejercicio2',Date.new(2015,1,13),Date.new(2015,1,15),e,5)
-rescue ArgumentError
-  puts $!
-ensure
-end
+#require 'Apartado'
+#require 'date'
+#
+#a = Apartado.new('enunciado1',1)
+#begin
+#  #Añade una fecha incorrecta
+#  e = Ejercicio.new('ejercicio1',Date.new(2015,2,13),Date.new(2015,1,15),a,5)
+#  rescue ArgumentError
+#    puts $!
+#  ensure
+#end
+#
+#begin
+#  e = Ejercicio.new('ejercicio1',Date.new(2015,1,13),Date.new(2015,1,15),a,5)
+#  puts e
+#  #Añade un ejercicio como apartado (error)
+#  e1 = Ejercicio.new('ejercicio2',Date.new(2015,1,13),Date.new(2015,1,15),e,5)
+#rescue ArgumentError
+#  puts $!
+#ensure
+#end
 
 

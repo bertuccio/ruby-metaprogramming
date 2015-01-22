@@ -14,14 +14,14 @@ class Apartado
   
 end
 
-#Test 
-
-begin
-a = Apartado.new('enunciado1',0)
-rescue ArgumentError
-  puts $!
-ensure
-  a = Apartado.new('enunciado1',1)
-  puts a.enunciado
-  puts a.puntuacion
-end
+##Test 
+#
+#begin
+#a = Apartado.new('enunciado1',0)
+#rescue ArgumentError
+#  puts $!
+#ensure
+#  a = Apartado.new('enunciado1',1)
+#  puts a.enunciado
+#  puts a.puntuacion
+#end
