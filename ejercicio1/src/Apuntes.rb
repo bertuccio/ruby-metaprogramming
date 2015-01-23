@@ -1,19 +1,22 @@
+require 'FechasInterfaz'
+
 class Apuntes
   
   include Comparable
-  
+  include FechasInterfaz
+ 
   attr :fechaComienzo
   
   def <=>(other)
     @fechaComienzo <=> other.fechaComienzo
   end
   
-  def initialize(descripcion, texto, fechaComienzo)
-    @descripcion = descripcion
-    @texto = texto
-    @fechaComienzo = fechaComienzo
-    @numHorasDedicacion = 0
-  end
+#  def initialize(descripcion, texto, fechaComienzo)
+#    @descripcion = descripcion
+#    @texto = texto
+#    @fechaComienzo = fechaComienzo
+#    @numHorasDedicacion = 0
+#  end
   
   def initialize(descripcion, texto, fechaComienzo, numHoras)
     @descripcion = descripcion
@@ -24,25 +27,18 @@ class Apuntes
   
   attr_reader :descripcion
   
-  def fechaComienzo=(fecha)
-    @fechaComienzo = fecha
-  end
+#  def fechaComienzo=(fecha)
+#    @fechaComienzo = fecha
+#  end
 
   def contains(elemento)
     return self == elemento
   end
   
-  def numHorasDedicacion=(num)
-    @numHorasDedicacion = num
-  end
+#  def numHorasDedicacion=(num)
+#    @numHorasDedicacion = num
+#  end
 
-  def numHorasDedicacion
-    @numHorasDedicacion
-  end
-  
-  def fechaComienzo
-    @fechaComienzo
-  end
   
   def to_s
     s = '+Apuntes: ' + @descripcion.to_s + ' comienzo: ' +

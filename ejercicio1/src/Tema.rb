@@ -1,7 +1,9 @@
+require 'FechasInterfaz'
 class Tema
   
   include Comparable
-  
+  include FechasInterfaz
+
   attr :fechaComienzo
   
   def <=>(other)
@@ -12,11 +14,26 @@ class Tema
     @descripcion = descripcion
     @elementos = nil
     @fechaComienzo = nil
+    @numHorasDedicacion = nil
   end
   
   attr_reader :descripcion
 
-
+  def fechaComienzo
+    if @fechaComienzo.nil?
+      unless @elementos.nil?
+        fechas = Array.new
+        @elementos.each{|elemento| fechas.push(elemento.fechaComienzo)}
+        fechas.sort!{|e1, e2| e1 <=> e2}
+        @fechaComienzo = fechas.first
+        return fechas.first
+      end
+      @fechaComienzo = Time.now.to_date
+      return Time.now.to_date
+    end
+    return @fechaComienzo
+  end
+  
   def contains(elemento)
     unless @elementos.nil?
       if @elementos.empty? 
@@ -30,16 +47,17 @@ class Tema
     return self == elemento
   end
   
-  def fechaComienzo
+  def tos(s, indent)
+    
+    s += '+Tema: ' + @descripcion.to_s + ', ' + @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
     unless @elementos.nil?
-      fechas = Array.new
-      @elementos.each{|elemento| fechas.push(elemento.fechaComienzo())} 
-      fechas.sort!{|e1, e2| e1 <=> e2}
-      @fechaComienzo = fechas.first
-      return fechas.first
+      i = 0
+      while i < indent
+        s += "\n\t"
+      end
+      indent++
+      s += @elementos.sort.tos(s,indent)
     end
-    @fechaComienzo = Time.now.to_date
-    return Time.now.to_date
   end
   
   def addElemento(elemento)
@@ -55,17 +73,10 @@ class Tema
     end
   end
   
-  def numHorasDedicacion
-    numHoras = 0
-    unless @elementos.nil?
-      @elementos.each{|elemento| 
-        (numHoras += elemento.numHorasDedicacion)} 
-    end
-    return numHoras
-  end
+
   
   def to_s
-    s = '+Tema: ' + @descripcion.to_s + ', ' + @fechaComienzo.to_s
+    s = '+Tema: ' + @descripcion.to_s + ', ' + @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
     unless @elementos.nil?
       s += "\n\t-" + @elementos.sort.to_s
     end

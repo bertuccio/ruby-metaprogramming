@@ -1,7 +1,10 @@
+require 'FechasInterfaz'
+
 class Asignatura
   
   include Comparable
-  
+  include FechasInterfaz
+
   attr :fechaComienzo
   
   def <=>(other)
@@ -15,21 +18,11 @@ class Asignatura
     @email = email 
     @elementos = nil
     @fechaComienzo = nil
+    @numHorasDedicacion = nil
   end
   
   attr_reader :descripcion
   
-  def fechaComienzo()
-    unless @elementos.nil?
-      fechas = Array.new
-      @elementos.each{|elemento| fechas.push(elemento.fechaComienzo())} 
-      fechas.sort!{|e1, e2| e1 <=> e2}
-      @fechaComienzo = fechas.first
-      return fechas.first
-    end
-    @fechaComienzo = Time.now.to_date
-    return Time.now.to_date
-  end
   
   def contains(elemento)
     unless @elementos.nil?
@@ -57,21 +50,39 @@ class Asignatura
     end
   end
   
-  def numHorasDedicacion
-    numHoras = 0
-    unless @elementos.nil?
-      @elementos.each{|elemento| 
-        (numHoras += elemento.numHorasDedicacion)} 
+  def fechaComienzo
+    if @fechaComienzo.nil?
+      unless @elementos.nil?
+        fechas = Array.new
+        @elementos.each{|elemento| fechas.push(elemento.fechaComienzo)}
+        fechas.sort!{|e1, e2| e1 <=> e2}
+        @fechaComienzo = fechas.first
+        return fechas.first
+      end
+      @fechaComienzo = Time.now.to_date
+      return Time.now.to_date
     end
-    return numHoras
+    return @fechaComienzo
+  end
+  
+  def tos(s, indent)
+    unless @elementos.nil?
+      i = 0
+      while i < indent
+        s += "\n\t"
+      end
+      indent++
+      s += @elementos.sort.tos(s,indent)
+    end
   end
   
   def to_s
+    indent = 0
     s = '+Asignatura: ' + @nombre.to_s + ', ' + @nif.to_s + 
-      ', ' + @email.to_s + ', ' + @fechaComienzo.to_s
-    unless @elementos.nil?
-      s += "\n\t-" + @elementos.sort.to_s
-    end
+      ', ' + @email.to_s + ', ' + @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
+    
+    self.tos(s,indent)
+    
     return s
   end
   
