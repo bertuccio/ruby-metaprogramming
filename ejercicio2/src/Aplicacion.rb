@@ -52,9 +52,10 @@ begin
   
   g1 = Grupo.new('123','profesor')
   g2 = Grupo.new('1234','profesor')
+  g3 = Grupo.new('12345','profesor')
   asignatura = Asignatura.new(123,'nombre',g1) 
   asignatura.addGrupo(g2)
-
+  asignatura.addGrupo(g3)
   tema = Tema.new('tema1')
   
   tema2 = Tema.new('tema2')
@@ -79,8 +80,9 @@ begin
   asignatura.numHorasDedicacion
   
   e1 = Estudiante.new('anonimo',123,'anonimo@anonimo.com')
-  e2 = Estudiante.new('anonima',123,'anonimo@anonimo.com') 
+  e2 = Estudiante.new('anonima',12345,'anonimo@anonimo.com') 
   e3 = Estudiante.new('anonima',1234,'anonimo@anonimo.com') 
+  e4 = Estudiante.new('anonima',12346,'anonimo@anonimo.com') 
    
   app = Aplicacion.new
   
@@ -90,8 +92,9 @@ begin
     app.altaEstudiante(e2)
     app.matricula(e1,asignatura)
     puts asignatura
-    #app.matricula(e2,asignatura)
+    app.matricula(e2,asignatura)
     app.matricula(e3,asignatura)
+    app.matricula(e4,asignatura)
     puts asignatura
   rescue ExcepcionEstudianteAlta => error
     print error, error.estudiante, " ", error.asignatura, "\n"
