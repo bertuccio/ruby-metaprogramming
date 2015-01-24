@@ -23,6 +23,7 @@ class Asignatura
   end
   
   attr_reader :descripcion
+  attr_reader :grupos
   
   
   def contains(elemento)

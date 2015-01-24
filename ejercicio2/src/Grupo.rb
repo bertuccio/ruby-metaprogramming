@@ -1,13 +1,33 @@
 class Grupo
   
-  def initialize(codigo, profesor, estudiantes)
+  include Comparable
+  
+  def initialize(codigo, profesor)
     @codigo = codigo
     @profesor = profesor
-    @estudiantes = estudiantes
+    @estudiantes = Array.new
+  end
+
+  attr_reader :codigo
+
+  def addEstudiante(estudiante)
+    unless @estudiantes.include?(estudiante)
+      @estudiantes.push(estudiante) 
+    end
   end
   
-  attr_reader :codigo
+  def getNumAlumnos
+    return @estudiantes.length()
+  end
+    
+  def to_s
+    return "Grupo: " + @codigo.to_s + " Profesor: " + @profesor +
+      "Num Estudiantes: " + @estudiante.length.to_s
+  end
   
+#  def (a2)
+#  end
+    
   def == (other)
       @codigo == other.codigo 
   end

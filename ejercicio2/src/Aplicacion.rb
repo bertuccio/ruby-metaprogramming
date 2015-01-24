@@ -27,9 +27,14 @@ class Aplicacion
   end
   
   def matricula(estudiante,asignatura)
-    unless @estudiantes.include?(estudiante)
+    unless @estudiantes.include?(estudiante) or
+      @asignaturas.include?(asignatura)
       raise ExcepcionEstudianteAlta.new(estudiante), 
         "Estudiante no dado de alta: ", caller
+    else
+      grupos = asignatura.grupos.sort_by{|g1| 
+        g1.getNumAlumnos}
+      grupos.first.addEstudiante(estudiante) 
     end
   end 
 end
@@ -66,6 +71,10 @@ begin
   e2 = Estudiante.new('anonima',123,'anonimo@anonimo.com') 
  
   app = Aplicacion.new
+  
+  g = Grupo.new('123','profesor')
+  
+  
 
   begin
     app.addAsignatura(asignatura)
@@ -73,6 +82,6 @@ begin
     app.altaEstudiante(e2)
     app.matricula(e1,asignatura)
   rescue ExcepcionEstudianteAlta => error
-    print error, error.estudiante, "\n"
+    print error, error.estudiante, error.asignatura, "\n"
   end
 end
