@@ -6,4 +6,10 @@ class Grupo
     @estudiantes = estudiantes
   end
   
+  attr_reader :codigo
+  
+  def == (other)
+      @codigo == other.codigo 
+  end
+  
 end

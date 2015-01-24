@@ -2,7 +2,7 @@ class Estudiante
   
   @@ids = 0
   
-  atrr :nombre
+  attr_reader :nif
   
   def initialize(nombre, nif, email)
     @id = @@ids
@@ -13,7 +13,11 @@ class Estudiante
   end
   
   def == (other)
-      @nombre == other.nombre 
+      @nif == other.nif 
+  end
+  
+  def to_s
+    return "Nombre: " + @nombre.to_s + " NIF: " + @nif.to_s
   end
   
 end
