@@ -6,6 +6,7 @@ require 'Apartado'
 require 'Ejercicio'
 require 'Estudiante'
 require 'ExcepcionAltaEstudiante'
+require 'Grupo'
 
 class Aplicacion
   
@@ -34,6 +35,12 @@ class Aplicacion
     else
       grupos = asignatura.grupos.sort_by{|g1| 
         g1.getNumAlumnos}
+      grupos.each{|g| 
+        if g.estudiantes.include?(estudiante)
+          raise ExcepcionEstudianteAlta.new(estudiante, asignatura), 
+                  "Estudiante ya matriculado: ", caller
+        end
+      }
       grupos.first.addEstudiante(estudiante) 
     end
   end 
@@ -43,7 +50,11 @@ begin
   apartado = Apartado.new('enunciado1',2)
   e = Ejercicio.new('ejercio1',Date.new(2015,1,5),Date.new(2015,1,7),apartado,3)
   
-  asignatura = Asignatura.new(123,'nombre','as')
+  g1 = Grupo.new('123','profesor')
+  g2 = Grupo.new('1234','profesor')
+  asignatura = Asignatura.new(123,'nombre',g1) 
+  asignatura.addGrupo(g2)
+
   tema = Tema.new('tema1')
   
   tema2 = Tema.new('tema2')
@@ -69,19 +80,20 @@ begin
   
   e1 = Estudiante.new('anonimo',123,'anonimo@anonimo.com')
   e2 = Estudiante.new('anonima',123,'anonimo@anonimo.com') 
- 
+  e3 = Estudiante.new('anonima',1234,'anonimo@anonimo.com') 
+   
   app = Aplicacion.new
   
-  g = Grupo.new('123','profesor')
-  
-  
-
-  begin
+begin
     app.addAsignatura(asignatura)
     app.altaEstudiante(e1)
     app.altaEstudiante(e2)
     app.matricula(e1,asignatura)
+    puts asignatura
+    #app.matricula(e2,asignatura)
+    app.matricula(e3,asignatura)
+    puts asignatura
   rescue ExcepcionEstudianteAlta => error
-    print error, error.estudiante, error.asignatura, "\n"
+    print error, error.estudiante, " ", error.asignatura, "\n"
   end
 end

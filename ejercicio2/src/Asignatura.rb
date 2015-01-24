@@ -24,6 +24,7 @@ class Asignatura
   
   attr_reader :descripcion
   attr_reader :grupos
+  attr_reader :nombre
   
   
   def contains(elemento)
@@ -41,6 +42,12 @@ class Asignatura
       end
     end
     return self == elemento
+  end
+  
+  def addGrupo(grupo)
+    unless @grupos.include?(grupo)
+      @grupos.push(grupo)
+    end
   end
   
   def addElemento(elemento)
@@ -100,7 +107,8 @@ class Asignatura
   
   def to_s
     printf '+Asignatura: ' + @codigo.to_s + ', ' + @nombre.to_s + ', ' +
-      @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
+      @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s +
+      "\n+" + @grupos.to_s
     
     self.print(1)
     return ""

@@ -7,23 +7,16 @@ class ExcepcionEstudianteAlta < RuntimeError
 ##  attr_reader :asignatura
   def asignatura
     unless @asignatura.nil?
-      return @asignatura
+      return @asignatura.nombre
     end
     return ''
   end
   
   def estudiante
     unless @estudiante.nil?
-      return @estudiante
+      return @estudiante.nombre
     end
     return ''
   end
 end
 
-
-begin
-  e = ExcepcionEstudianteAlta.new('est','asig')
-  print e.estudiante + e.asignatura
-  e = ExcepcionEstudianteAlta.new('estu')
-  print e.estudiante + e.asignatura
-end

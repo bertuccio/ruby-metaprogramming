@@ -9,6 +9,7 @@ class Grupo
   end
 
   attr_reader :codigo
+  attr_reader :estudiantes
 
   def addEstudiante(estudiante)
     unless @estudiantes.include?(estudiante)
@@ -22,7 +23,7 @@ class Grupo
     
   def to_s
     return "Grupo: " + @codigo.to_s + " Profesor: " + @profesor +
-      "Num Estudiantes: " + @estudiante.length.to_s
+      " Num Estudiantes: " + @estudiantes.length.to_s
   end
   
 #  def (a2)

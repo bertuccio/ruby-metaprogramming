@@ -3,6 +3,7 @@ class Estudiante
   @@ids = 0
   
   attr_reader :nif
+  attr_reader :nombre
   
   def initialize(nombre, nif, email)
     @id = @@ids
