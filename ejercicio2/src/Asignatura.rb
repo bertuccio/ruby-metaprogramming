@@ -50,6 +50,19 @@ class Asignatura
     end
   end
   
+  def eliminaGrupo(grupo)
+    if @grupos.include?(grupo)
+      index = @grupos.index(grupo)
+      estudiantes = @grupos.fetch(index).estudiantes
+      @grupos.delete_at(index)
+      estudiantes.each{|e| 
+        grupos = @grupos.sort_by{|g1| 
+              g1.getNumAlumnos}
+        grupos.first.addEstudiante(e)      
+      }
+    end
+  end
+  
   def addElemento(elemento)
     if @elementos.nil?
       @elementos = Array.new

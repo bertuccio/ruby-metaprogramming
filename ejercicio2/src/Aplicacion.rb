@@ -27,6 +27,13 @@ class Aplicacion
     end
   end
   
+  def eliminaGrupo(asignatura, grupo)
+    if @asignaturas.include?(asignatura)
+      index = @asignaturas.index(asignatura)
+      @asignaturas.fetch(index).eliminaGrupo(grupo)
+    end
+  end
+  
   def matricula(estudiante,asignatura)
     unless @estudiantes.include?(estudiante) or
       @asignaturas.include?(asignatura)
@@ -95,6 +102,8 @@ begin
     app.matricula(e2,asignatura)
     app.matricula(e3,asignatura)
     app.matricula(e4,asignatura)
+    app.eliminaGrupo(asignatura,g1)
+  app.eliminaGrupo(asignatura,g2)
     puts asignatura
   rescue ExcepcionEstudianteAlta => error
     print error, error.estudiante, " ", error.asignatura, "\n"
