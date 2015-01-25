@@ -54,10 +54,29 @@ class Aplicacion
   end 
   
   def login(estudiante)
-    unless @estudiantes.include?(estudiante)
-      menu(estudiante)
+    if @estudiantes.include?(estudiante)
+      mainMenu(estudiante)
     end
   end
+  
+  def mainMenu(estudiante)
+    printf "Menu: \n"
+    asignaturas = Array.new
+    @asignaturas.each{|a|
+      a.grupos.each{|g|
+        if g.estudiantes.include?(estudiante)
+          asignaturas.push(a)
+        end
+      }
+    }
+    begin
+      asignaturas.each{|a| 
+        printf(asignaturas.index(a).to_s+") "+a.to_s+"\n")}
+      printf(asignaturas.length().to_s+") " + "salir"+"\n")
+      printf "Introduce eleccion: "
+      eleccion = gets    
+    end while true
+    end
   
 end
 
@@ -113,6 +132,7 @@ begin
   app.matricula(e4,asignatura)
   app.eliminaGrupo(asignatura,g1)
   puts asignatura
+  app.login(e1)
 rescue ExcepcionEstudianteAlta => error
   print error, error.estudiante, "\n"
 rescue ExcepcionMatriculacion => error
