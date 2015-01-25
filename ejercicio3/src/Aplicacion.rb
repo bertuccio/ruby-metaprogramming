@@ -60,7 +60,11 @@ class Aplicacion
   end
   
   def mainMenu(estudiante)
-    printf "Menu: \n"
+    
+    printf "##############\n"
+    printf "# Menu:      #\n"
+    printf "##############\n"
+    
     asignaturas = Array.new
     @asignaturas.each{|a|
       a.grupos.each{|g|
@@ -70,14 +74,20 @@ class Aplicacion
       }
     }
     begin
-      asignaturas.each{|a| 
+      asignaturas.each{|a|
         printf(asignaturas.index(a).to_s+") "+a.to_s+"\n")}
       printf(asignaturas.length().to_s+") " + "salir"+"\n")
       printf "Introduce eleccion: "
-      eleccion = gets    
+      eleccion = gets
+      if eleccion.to_i == asignaturas.length()
+        break
+      elsif eleccion.to_i < asignaturas.length() and
+        eleccion.to_i >= 0
+          puts asignaturas.fetch(eleccion.to_i)
+          break
+      end
     end while true
-    end
-  
+  end
 end
 
 begin
