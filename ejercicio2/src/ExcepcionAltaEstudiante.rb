@@ -1,22 +1,10 @@
 class ExcepcionEstudianteAlta < RuntimeError
   
-  def initialize(*args)
-    @estudiante, @asignatura = *args
+  def initialize(estudiante)
+    @estudiante = estudiante
   end
   
-##  attr_reader :asignatura
-  def asignatura
-    unless @asignatura.nil?
-      return @asignatura.nombre
-    end
-    return ''
-  end
-  
-  def estudiante
-    unless @estudiante.nil?
-      return @estudiante.nombre
-    end
-    return ''
-  end
+  attr_reader :estudiante
+
 end
 
