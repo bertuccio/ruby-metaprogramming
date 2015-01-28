@@ -8,9 +8,10 @@ require 'Estudiante'
 require 'ExcepcionAltaEstudiante'
 require 'ExcepcionMatriculacion'
 require 'Grupo'
+require 'fileutils.rb'
 
 class Aplicacion
-  
+
   def initialize
     @estudiantes = Array.new
     @asignaturas = Array.new
@@ -59,6 +60,31 @@ class Aplicacion
     end
   end
   
+  def entrega
+    
+    printf "Introduce el nombre del fichero junto con su extensión: "
+    file = gets.chomp 
+    copyFile(FileUtils.getwd().to_s, file)
+    
+  end
+  
+  def copyFile(path, file)
+    
+    dest = "entregas/"+file
+    source = path.to_s + "/" + file.to_s
+    puts source
+    if File.exist?(source.to_s)
+      if File.exist?(dest.to_s)
+        puts("No se puede sobreescribir el fichero: "+ file.to_s)
+      else
+        FileUtils.cp_r(source.to_s, dest.to_s)
+      end    
+    else
+      puts("No existe el fichero: "+ file.to_s)
+    end
+    
+  end
+  
   def mainMenu(estudiante)
     
     printf "##############\n"
@@ -83,8 +109,7 @@ class Aplicacion
         break
       elsif eleccion.to_i < asignaturas.length() and
         eleccion.to_i >= 0
-          puts asignaturas.fetch(eleccion.to_i)
-          break
+          asignaturas.fetch(eleccion.to_i).menu
       end
     end while true
   end
@@ -92,8 +117,14 @@ end
 
 begin
   apartado = Apartado.new('enunciado1',2)
+  apartado2 = Apartado.new('enunciado2',4)
   e = Ejercicio.new('ejercio1',Date.new(2015,1,5),Date.new(2015,1,7),apartado,3)
-
+  e.addApartado(apartado2)
+  
+  
+  
+  e.descarga
+  
   g1 = Grupo.new('123','profesor')
   g2 = Grupo.new('1234','profesor')
   g3 = Grupo.new('12345','profesor')
@@ -106,6 +137,9 @@ begin
   apuntes3 = Apuntes.new('apunt1','texto',Date.new(2009,1,5),10)
   apuntes1 = Apuntes.new('apunt3','texto',Date.new(2011,7,5),3)
   apuntes2 = Apuntes.new('apunt2','texto',Date.new(2008,3,5),1)
+  
+  apuntes3.descarga
+  
   tema.addElemento(apuntes2)
   tema.addElemento(apuntes1)
   tema2.addElemento(apuntes3)
@@ -129,7 +163,8 @@ begin
   e4 = Estudiante.new('anonima',12346,'anonimo@anonimo.com')
 
   app = Aplicacion.new
-
+  app.entrega
+  
   app.addAsignatura(asignatura)
   app.altaEstudiante(e1)
   app.altaEstudiante(e2)

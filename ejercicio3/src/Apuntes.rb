@@ -35,6 +35,13 @@ class Apuntes
     return self == elemento
   end
   
+  def descarga
+    File.open(@descripcion.to_s+".txt","w") do |file|
+      file.puts @texto
+    end
+  end
+  
+  
 #  def numHorasDedicacion=(num)
 #    @numHorasDedicacion = num
 #  end

@@ -119,6 +119,10 @@ class Asignatura
     end
   end
   
+  def menu
+    
+  end
+  
   def to_s
     s = '+Asignatura: ' + @codigo.to_s + ', ' + @nombre.to_s + ', ' +
       @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s +

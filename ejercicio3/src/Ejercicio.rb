@@ -79,6 +79,15 @@ class Ejercicio
     printf("\n")
   end
   
+  def descarga
+    File.open(@descripcion.to_s+".txt","w") do |file|
+      @apartados.each(){|a|
+        file.puts("Puntiación: "+a.puntuacion.to_s)
+        file.puts  a.enunciado
+      }
+    end
+  end
+  
   def to_s
     s = '+Ejercicio: ' + @descripcion.to_s + ' comienzo: ' +
       @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
