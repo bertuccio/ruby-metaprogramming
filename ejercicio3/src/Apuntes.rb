@@ -10,14 +10,7 @@ class Apuntes
   def <=>(other)
     @fechaComienzo <=> other.fechaComienzo
   end
-  
-#  def initialize(descripcion, texto, fechaComienzo)
-#    @descripcion = descripcion
-#    @texto = texto
-#    @fechaComienzo = fechaComienzo
-#    @numHorasDedicacion = 0
-#  end
-  
+    
   def initialize(descripcion, texto, fechaComienzo, numHoras)
     @descripcion = descripcion
     @texto = texto
@@ -27,10 +20,6 @@ class Apuntes
   
   attr_reader :descripcion
   
-#  def fechaComienzo=(fecha)
-#    @fechaComienzo = fecha
-#  end
-
   def contains(elemento)
     return self == elemento
   end
@@ -41,11 +30,6 @@ class Apuntes
     end
   end
   
-  
-#  def numHorasDedicacion=(num)
-#    @numHorasDedicacion = num
-#  end
-
   
   def print(indent)
     printf self.to_s

@@ -10,26 +10,7 @@ class Ejercicio
     @fechaComienzo <=> other.fechaComienzo
   end
   
-  
-#  def initialize(descripcion, fechaComienzo, fechaEntrega, apartado)
-#    unless (apartado.is_a?(Apartado))
-#      raise ArgumentError,
-#              "El elemento: " + apartado.to_s + " no es de tipo Apartado",
-#              caller
-#    end
-#    if (fechaComienzo > fechaEntrega)
-#      raise ArgumentError,
-#              "La fecha de comienzo debe ser antes que la fecha de entrega",
-#              caller
-#    end
-#    @descripcion = descripcion
-#    @fechaEntrega = fechaEntrega
-#    @fechaComienzo = fechaComienzo
-#    @numHorasDedicacion = 0
-#    @apartados = Array.new
-#    @apartados.push(apartado)
-#  end
-#  
+
   def initialize(descripcion, fechaComienzo, fechaEntrega, apartado, numHoras)
     unless (apartado.is_a?(Apartado))
       raise ArgumentError,
@@ -57,17 +38,9 @@ class Ejercicio
     end
   end
 
-#  def fechaComienzo=(fecha)
-#    @fechaComienzo = fecha
-#  end
-  
   def contains(elemento)
     return self == elemento
   end
-  
-#  def numHorasDedicacion=(num)
-#    @numHorasDedicacion = num
-#  end
 
   
   def == (other)

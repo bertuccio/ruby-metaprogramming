@@ -25,10 +25,7 @@ class Grupo
     return "Grupo: " + @codigo.to_s + " Profesor: " + @profesor +
       " Num Estudiantes: " + @estudiantes.length.to_s
   end
-  
-#  def (a2)
-#  end
-    
+      
   def == (other)
       @codigo == other.codigo 
   end

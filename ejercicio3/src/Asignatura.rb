@@ -108,7 +108,6 @@ class Asignatura
     unless @elementos.nil?
       localindent = indent
       indent +=1
-      #ojete = @elementos.sort
       @elementos.sort.each{|x| 
         i = 0
         while i < localindent
