@@ -76,6 +76,22 @@ class Tema
     end
   end
   
+  def menu
+    begin
+      @elementos.each{|e|
+        printf(@elementos.index(e).to_s+") "+e.to_s+"\n")}
+      printf(@elementos.length().to_s+") " + "volver"+"\n")
+      printf "Introduce eleccion: "
+      eleccion = gets
+      if eleccion.to_i == @elementos.length()
+        break
+      elsif eleccion.to_i < @elementos.length() and
+        eleccion.to_i >= 0
+        @elementos.fetch(eleccion.to_i).menu
+      end
+    end while true
+  end
+  
   def print(indent)
     printf self.to_s
     printf "\n"
@@ -95,9 +111,7 @@ class Tema
   
   def to_s
     s = '+Tema: ' + @descripcion.to_s + ', ' + @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
-#    unless @elementos.nil?
-#      s += "\n\t-" + @elementos.sort.to_s
-#    end
+
     return s
   end
   

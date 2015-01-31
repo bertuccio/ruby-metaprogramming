@@ -69,7 +69,7 @@ begin
   tema.addElemento(apuntes2)
   tema.addElemento(apuntes1)
   tema2.addElemento(apuntes3)
-  tema.addElemento(Ejercicio.new('ejercio2',Date.new(2015,1,5),Date.new(2015,1,7),apartado,3))
+  tema.addElemento(Ejercicio.new('ejercio2',Date.new(2015,1,5),Date.new(2015,12,7),apartado,3))
   asignatura.addElemento(tema)
   tema.addElemento(tema2)
   tema3 = Tema.new('tema3')
@@ -90,7 +90,7 @@ begin
   
 
   app = Aplicacion.new
-  app.entrega
+  #app.entrega
   
   app.addAsignatura(asignatura)
   app.altaEstudiante(e1)

@@ -61,9 +61,59 @@ class Ejercicio
     end
   end
   
+  def entrega
+    
+    printf "Introduce el nombre del fichero junto con su extensión: "
+    file = gets.chomp 
+    copyFile(FileUtils.getwd().to_s, file)
+    
+  end
+  
+  def copyFile(path, file)
+    
+    dest = "entregas/"+@descripcion.to_s+"/"
+    FileUtils.mkdir_p dest
+    puts dest
+    dest += file
+    source = path.to_s + "/" + file.to_s
+    puts source
+    
+    if File.exist?(source.to_s)
+      if File.exist?(dest.to_s)
+        puts("No se puede sobreescribir el fichero: "+ file.to_s)
+      else
+        FileUtils.cp_r(source.to_s, dest.to_s)
+      end    
+    else
+      puts("No existe el fichero: "+ file.to_s)
+    end
+  end
+  
+  def menu
+    begin
+      printf("0) descargar"+"\n")
+      printf("1) entrega"+"\n")
+      printf("2) volver"+"\n")
+      printf "Introduce eleccion: "
+      eleccion = gets
+      if eleccion.to_i == 2
+        break
+      elsif eleccion.to_i == 1
+        if Date.today < @fechaEntrega
+          self.entrega
+        else
+          puts "Plazo terminado "
+        end      
+      elsif eleccion.to_i == 0
+        self.descarga
+      end
+    end while true
+  end
+  
   def to_s
-    s = '+Ejercicio: ' + @descripcion.to_s + ' comienzo: ' +
-      @fechaComienzo.to_s + ' horas: ' +@numHorasDedicacion.to_s
+    s = '+Ejercicio: ' + @descripcion.to_s + ' comienzo: ' + @fechaComienzo.to_s + 
+      ' entrega: ' + @fechaEntrega.to_s +
+      ' horas: ' +@numHorasDedicacion.to_s
     return s
   end
 

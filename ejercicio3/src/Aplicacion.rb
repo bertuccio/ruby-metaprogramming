@@ -48,30 +48,7 @@ class Aplicacion
     end
   end
   
-  def entrega
-    
-    printf "Introduce el nombre del fichero junto con su extensión: "
-    file = gets.chomp 
-    copyFile(FileUtils.getwd().to_s, file)
-    
-  end
-  
-  def copyFile(path, file)
-    
-    dest = "entregas/"+file
-    source = path.to_s + "/" + file.to_s
-    puts source
-    if File.exist?(source.to_s)
-      if File.exist?(dest.to_s)
-        puts("No se puede sobreescribir el fichero: "+ file.to_s)
-      else
-        FileUtils.cp_r(source.to_s, dest.to_s)
-      end    
-    else
-      puts("No existe el fichero: "+ file.to_s)
-    end
-    
-  end
+
   
   def mainMenu(estudiante)
     
