@@ -48,9 +48,6 @@ begin
   e.addApartado(apartado2)
   
   
-  
-  e.descarga
-  
   g1 = Grupo.new('123','profesor')
   g2 = Grupo.new('1234','profesor')
   g3 = Grupo.new('12345','profesor')
@@ -64,14 +61,12 @@ begin
   apuntes1 = Apuntes.new('apunt3','texto',Date.new(2011,7,5),3)
   apuntes2 = Apuntes.new('apunt2','texto',Date.new(2008,3,5),1)
   
-  apuntes3.descarga
-  
   tema.addElemento(apuntes2)
   tema.addElemento(apuntes1)
   tema2.addElemento(apuntes3)
   tema.addElemento(Ejercicio.new('ejercio2',Date.new(2015,1,5),Date.new(2015,12,7),apartado,3))
   asignatura.addElemento(tema)
-  tema.addElemento(tema2)
+  #tema.addElemento(tema2)
   tema3 = Tema.new('tema3')
   tema3.addElemento(Apuntes.new('apunt4','texto',Date.new(2008,3,5),6))
   asignatura.addElemento(tema3)
@@ -103,7 +98,6 @@ begin
   app.matricula(e3,asignatura)
   app.matricula(e4,asignatura)
   app.eliminaGrupo(asignatura,g1)
-  puts asignatura
   app.login(e1)
 rescue ExcepcionEstudianteAlta => error
   print error, error.estudiante, "\n"
