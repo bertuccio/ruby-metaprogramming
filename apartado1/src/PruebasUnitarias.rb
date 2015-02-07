@@ -5,44 +5,44 @@ module PruebasUnitarias
     
     def assertIgual(eval1, eval2)
       if(eval1 == eval2)
-        @numAciertos =+ 1
+        @numAciertos += 1
       end
-      @numAsserts =+ 1
+      @numAsserts += 1
     end
     
     def assertCierto(eval)
       if eval
-        @numAciertos =+ 1
+        @numAciertos += 1
       end
-      @numAsserts =+ 1
+      @numAsserts += 1
     end
     
     def assertFalso(eval)
       if (not eval)
-        @numAciertos =+ 1
+        @numAciertos += 1
       end
-        @numAsserts =+ 1
+        @numAsserts += 1
     end
     
     def assertDistinto(eval1, eval2)
       if (eval1 != eval2)
-        @numAciertos =+ 1
+        @numAciertos += 1
       end
-        @numAsserts =+ 1
+        @numAsserts += 1
     end
     
     def assertNil(eval)
       if eval.nil?
-        @numAciertos =+ 1
+        @numAciertos += 1
       end
-        @numAsserts =+ 1
+        @numAsserts += 1
     end
     
     def assertContiene(contenedor, e)
       if contenedor.include?(e)
-        @numAciertos =+ 1
+        @numAciertos += 1
       end
-        @numAsserts =+ 1
+        @numAsserts += 1
     end
     
     def actualizacion
@@ -51,9 +51,9 @@ module PruebasUnitarias
     end
     
     def to_s
-      s = "cumple el " + ((@numAciertos/@numAsserts)*100).to_s + 
+      s = "cumple el " + (@numAciertos.fdiv(@numAsserts)*100).to_i.to_s + 
         "% de las aserciones, falla " +
-        ((@numAsserts - @numAciertos/@numAsserts)*100).to_s +
+        ((@numAsserts - @numAciertos).fdiv(@numAsserts)*100).to_i.to_s +
         "% de las aserciones"
       return s; 
     end
@@ -77,7 +77,6 @@ module PruebasUnitarias
         }
       end
     end
-    
-    
+
   end
 end
