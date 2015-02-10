@@ -157,7 +157,6 @@ class TablaFiltrable
             end
             index += 1
           }
-          puts indices
           indices = indices.sort{|a,b| b <=> a}
           
           indices.each{|indice|
